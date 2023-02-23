@@ -1,7 +1,7 @@
 import React from 'react'
 import {Flex,CloseButton,Button,useDisclosure,Box, Accordion, AccordionItem,AccordionButton,AccordionPanel,AccordionIcon,
 Image, Spacer,HStack,Heading, Tooltip,Text, AspectRatio, VStack, Link,  Drawer,DrawerBody,DrawerFooter,DrawerHeader,DrawerOverlay,DrawerContent,DrawerCloseButton,FormLabel,Textarea,
-InputGroup,Stack,Input,InputLeftAddon,InputRightAddon,Select} from '@chakra-ui/react'
+InputGroup,Stack,Input,InputLeftAddon,InputRightAddon,Select, Center} from '@chakra-ui/react'
 import {
     Alert,
     AlertIcon,
@@ -208,12 +208,18 @@ const Freetrialdrawer=()=>{
       )
       }
   <Flex  align='center' mr='30px'
- justify='flex-end' 
- justifyContent='space-between'>
+ justify='flex-end' maxH='1.2cm' 
+ justifyContent='space-between'
+ alignItems='center'
+ >
  
- <Image src='#' />
-<Spacer/>
-<HStack w='40%' alignItems='flex-end' >
+ 
+
+<HStack w='47%' alignItems='flex-end' mx='70px' >
+<Center>
+<Image maxW='2cm'   src='https://i.ibb.co/J5WLcDd/Logo-Wrap-up-Project-Company.png' />
+  <Text size='xl'  >Wrap-Up</Text>
+  </Center>
   {<Manageaccordian heads='Why Us?' />}
   {<Manageaccordian heads='Features' />}
   {<Manageaccordian heads='Resources' />}
@@ -224,6 +230,7 @@ const Freetrialdrawer=()=>{
 <HStack  w='30%' align='center' mr='30px'
  justify='flex-end' 
  justifyContent='space-between'
+ alignItems='center'
 >
 <Tooltip label='Get in Touch With Us.' >
   <Text>Contact Sales</Text>

@@ -3,6 +3,7 @@ import React,{useEffect, useState} from 'react'
 import{FaInstagram,FaTwitter,FaFacebookF,FaLinkedinIn,FaYoutube} from 'react-icons/fa'
 import {FcGoogle} from 'react-icons/fc'
 import { Icon } from '@chakra-ui/react'
+import Homepagecard from './Homepagecard'
 const Footer = () => {
 const[timerslide,settimerslide]=useState('-20')
 const SlideshowofComapnycomponents =()=>{
@@ -23,8 +24,6 @@ const SlideshowofComapnycomponents =()=>{
 useEffect(()=>{
 
 },[])
-
-
 
   const Slideshowofcompany=()=>{
 const timersetslide=()=>{
@@ -193,7 +192,7 @@ const Footerrowlastcontainer=()=>{
   
     return (
     <div>
-
+<Homepagecard/>
 {/* <Slideshowofcompany/> */}
 <Footerrowone />
 <Divider colorScheme='whiteAlpha' variant='dashed'  />
