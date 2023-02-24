@@ -9,7 +9,7 @@ const Homepagecard = () => {
  const Cardscomponent=({headicons,head,detail,linktext})=>{
 
 return(
-<Box _hover={{bgColor:'#63171B',color:'white'}}  textAlign='left' bgColor='#FFFAF0' p='50px' borderRadius={50} >
+<Box _hover={{bgColor:'#63171B',color:'white'}} h='fit-content' textAlign='left' bgColor='#FFFAF0' p='50px' borderRadius={50} >
 <VStack  align='flex-start' gap='3px' >
 
 <Icon  as={headicons} boxSize={10} />
@@ -52,7 +52,7 @@ return(
 
 
 
-<SimpleGrid  columns={3}  w='90%' margin='auto' gap='25px' m={10} >
+<SimpleGrid  columns={{xl:'3',base:'1',sm:'2'  }}  w='90%' margin='auto' gap='25px' m={10} >
 <Cardscomponent    headicons={MdOutlineSchool} head='Wrike Discover' linktext='Start a course today' detail='Learn the basics or our advanced features — and everything in between — in our online courses and certifications.'  />
 <Cardscomponent    headicons={SiStartrek} head='Getting Started Guide' linktext='Read more' detail='Not a visual learner? Our Getting Started Guide has all you need to be productive in Wrike with both videos and text explanations.'  />
 <Cardscomponent    headicons={GiCommercialAirplane} head='Best Practices' linktext='Learn more' detail='Looking for a step-by-step to start off your project management right? Our best practices guide is just what you need.

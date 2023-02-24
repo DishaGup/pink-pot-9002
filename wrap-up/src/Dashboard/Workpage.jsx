@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { createStandaloneToast } from '@chakra-ui/toast'
 import { GiHamburgerMenu } from "react-icons/gi"
 import { Button, Center, Container, Flex, Heading, Input, Spacer, Tooltip, useDisclosure, Stack, SimpleGrid, Checkbox, FormControl,FormErrorMessage,
-  FormHelperText,} from '@chakra-ui/react'
-import { BsBellFill, BsChevronDown, BsPlusCircle } from "react-icons/bs"
+  FormHelperText,ButtonProps,useColorMode,} from '@chakra-ui/react'
+import { BsBellFill, BsChevronDown, BsPlusCircle,BsSun, BsMoonStarsFill } from "react-icons/bs"
+
 import { Icon } from '@chakra-ui/react'
 import { FaUserPlus, FaPencilAlt } from 'react-icons/fa'
 import { BiCube } from 'react-icons/bi'
@@ -14,14 +15,12 @@ import {
   DrawerBody, Modal, Menu, MenuButton, MenuList, MenuItem, MenuItemOption,MenuGroup,MenuOptionGroup,MenuDivider,ModalOverlay,
   ModalContent,ModalHeader,ModalFooter,ModalBody,ModalCloseButton,DrawerFooter,DrawerHeader,DrawerOverlay,DrawerContent,DrawerCloseButton
 } from '@chakra-ui/react'
-export default function Workpage() {
-
+import { AuthContext } from '../RoutesPage/AuthContextProvider'
+export default function Workpage(props: ButtonProps) {
+  const {isAuth,logoutUser} =useContext(AuthContext)
   const [modals, setIsmodals] = useState(false)
   const [task, settask] = useState([])
-
-  //  useOutsideClick({
-  //   handler: () => setIsmodals(false),
-  // })
+  const { colorMode, toggleColorMode } = useColorMode()
 
 
   function Drawerburgerdashboard({ isOpen, onClose, firstField }) {
@@ -126,6 +125,14 @@ settask([...task,newtask])
           }
           <Spacer />
           <HStack gap={3} >
+          <Button
+          aria-label="Toggle Color Mode"
+          onClick={toggleColorMode}
+          _focus={{ boxShadow: 'none' }}
+          w="fit-content"
+          {...props}>
+          {colorMode === 'light' ? <BsMoonStarsFill  boxSize={8} /> : <BsSun   boxSize={8}/>}
+        </Button>
             <Tooltip label='Search tasks,projects,files and more' >
               <Input type='search' placeholder='Search' />
             </Tooltip>
@@ -171,7 +178,7 @@ settask([...task,newtask])
                 <MenuItem>Upgrade</MenuItem>
                 <MenuItem>Help</MenuItem>
                 <MenuDivider />
-                <MenuItem>
+                <MenuItem onClick={logoutUser}  >
                   Log Out</MenuItem>
 
               </MenuList>

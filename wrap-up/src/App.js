@@ -1,18 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './Homepage/Components/Navbar';
-import Herobannerpage from './Homepage/Components/Herobannerpage';
-import Footer from './Homepage/Components/Footer';
 import Workpage from './Dashboard/Workpage';
+import MainHomepage from './Homepage/Components/MainHomepage';
+import { useContext } from 'react';
+import { AuthContext } from './RoutesPage/AuthContextProvider';
+import AllRouter from './RoutesPage/AllRouter';
+import { Navigate } from 'react-router-dom';
+
+
 
 function App() {
+  const{isAuth} =useContext(AuthContext)
   return (
     <div className="App">
-     {/* <Navbar/>
-     <Herobannerpage/>
-     <Footer/> */}
+   {/* {
+isAuth?<Navigate to='/workpage'/> :<Navigate to='/' />
 
-     <Workpage/>
+   } */}
+   {/* {isAuth?<Workpage/>:  <MainHomepage/>} */}
+  {/* <AllRouter/> */}
+  <Workpage/>
     </div>
   );
 }
