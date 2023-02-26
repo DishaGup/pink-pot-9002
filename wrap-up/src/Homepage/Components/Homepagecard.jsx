@@ -1,5 +1,5 @@
 import React from 'react'
-import { AspectRatio, Box, Heading, Icon, VStack,Flex,Text,Link, SimpleGrid, Spacer,Center } from '@chakra-ui/react'
+import { Box, Heading, Icon, VStack,Flex,Text,Link, SimpleGrid, Spacer,Center,useColorModeValue } from '@chakra-ui/react'
 import {MdOutlineSchool} from 'react-icons/md'
 import {TbArrowNarrowRight,TbSpeakerphone,TbTemplate} from 'react-icons/tb'
 import {SiStartrek,SiWechat} from 'react-icons/si'
@@ -9,7 +9,7 @@ const Homepagecard = () => {
  const Cardscomponent=({headicons,head,detail,linktext})=>{
 
 return(
-<Box _hover={{bgColor:'#63171B',color:'white'}} h='fit-content' textAlign='left' bgColor='#FFFAF0' p='50px' borderRadius={50} >
+<Box _hover={{bgColor:'#63171B',color:'white'}} h='fit-content' textAlign='left' bgColor={useColorModeValue('#FFFAF0', 'black.400')}   color={useColorModeValue('black.500', 'white')} p='50px' borderRadius={50}  >
 <VStack  align='flex-start' gap='3px' >
 
 <Icon  as={headicons} boxSize={10} />
@@ -34,13 +34,6 @@ return(
 
  }
  
- 
- 
-
-
-
- 
- 
     return (
     <div>
         <Center>
@@ -63,11 +56,6 @@ return(
 '  />
 <Cardscomponent    headicons={TbTemplate} head='Templates' linktext='See what’s available' detail='Get tried-and-true setups in Wrike with a click: go Agile, better manage events, onboard employees, and more — all for free.
 '  />
-
-
-
-
-
 
 </SimpleGrid>
 

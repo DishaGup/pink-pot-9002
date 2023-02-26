@@ -5,69 +5,8 @@ import {FcGoogle} from 'react-icons/fc'
 import { Icon } from '@chakra-ui/react'
 import Homepagecard from './Homepagecard'
 const Footer = () => {
-const[timerslide,settimerslide]=useState('-20')
-const SlideshowofComapnycomponents =()=>{
-
-   return(
-    <Tag size='lg' colorScheme='red' borderRadius='full'>
-  <Avatar
-    src='https://bit.ly/sage-adebayo'
-    size='xs'
-    name='Segun Adebayo'
-    ml={-1}
-    mr={2}
-  />
-  <TagLabel>Segun</TagLabel>
-</Tag>
-   ) 
-}
-useEffect(()=>{
-
-},[])
-
-  const Slideshowofcompany=()=>{
-const timersetslide=()=>{
-setInterval(() => {
-    settimerslide((time)=>{
-        if(timerslide==-1120){
-            timerslide=-20
-        }
-return time-2;
-    })
-
-        }, 1000)
-}
 
 
-return(
-<HStack style={{transform: `translate3d(${timerslide}px, 0px, 0px)`}} >
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-<SlideshowofComapnycomponents/>
-
-
-</HStack>
-
-
-)
-
-
-
-
-  }
-  
   
   const Footerrowone=()=>{
 
@@ -193,7 +132,6 @@ const Footerrowlastcontainer=()=>{
     return (
     <div>
 <Homepagecard/>
-{/* <Slideshowofcompany/> */}
 <Footerrowone />
 <Divider colorScheme='whiteAlpha' variant='dashed'  />
 <Footerrowlastcontainer/>

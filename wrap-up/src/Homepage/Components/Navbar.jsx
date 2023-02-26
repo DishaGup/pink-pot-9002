@@ -5,7 +5,9 @@ import {Flex,CloseButton,Button,useDisclosure,Box, Accordion, AccordionItem,Acco
 Image, Spacer,HStack,Heading, Tooltip,Text, AspectRatio, VStack, Link,  Drawer,DrawerBody,DrawerFooter,DrawerHeader,DrawerOverlay,DrawerContent,DrawerCloseButton,FormLabel,Textarea,
 InputGroup,Stack,Input,InputLeftAddon,InputRightAddon,Select, Center,FormControl,FormErrorMessage,FormHelperText, Divider, Popover,
 PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,useColorModeValue,
-List,ListItem,ListIcon,} from '@chakra-ui/react'
+List,ListItem,ListIcon, transform,useColorMode} from '@chakra-ui/react'
+import { BsSun, BsMoonStarsFill } from "react-icons/bs"
+
 import {
     Alert,
     AlertIcon,
@@ -18,104 +20,10 @@ import {
 import { AuthContext } from '../../RoutesPage/AuthContextProvider';
 
 
-const Navbar = () => {
+const Navbar = (props: ButtonProps) => {
 
- const[mainpageinfo,setmainpageinfo]=useState([])
- const {isAuth,loginUser} =useContext(AuthContext)
-const Accordiancontentss=()=>{
-return(
-<Flex>
-{<VerticalSingleComponentsofAccordian />}
-<Spacer/>
-{<VerticalSingleComponentsofAccordian/>}
-
-</Flex>
-
-
-)
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const VerticalSingleComponentsofAccordian=()=>{
-
-  return(
- <Box w='100%'>
- <VStack>
- <SingleComponentsofAccordian iconname={FcAssistant} 
-  head='Marketing' text='Lorem12'
-  />
-<SingleComponentsofAccordian iconname={FcAssistant} 
-  head='Marketing' text='Lorem12'
-  />
-  <SingleComponentsofAccordian iconname={FcAssistant} 
-  head='Marketing' text='Lorem12'
-  />
-  <SingleComponentsofAccordian iconname={FcAssistant} 
-  head='Marketing' text='Lorem12'
-  />
-  {/* <SingleComponentsofAccordian iconname={FcAssistant} 
-  head='Marketing' text='Lorem12'
-  />
-  <SingleComponentsofAccordian iconname={FcAssistant} 
-  head='Marketing' text='Lorem12'
-  /> */}
-
-  
-
-  
- </VStack>
- <Link>See all Item</Link>
- </Box>
-)
-}
-
-
-const SingleComponentsofAccordian=({iconname,head,text})=>{
-return(<Box>
-
-  <Icon as={iconname} />
-
-<VStack g='5px' >
-  <Heading>{head}</Heading>
-  <Text>{text}</Text>
-</VStack>
-
-</Box>
-
-)
-}
-
-
-
-
-
-
-const Manageaccordian=()=>{
-return(
- 
-    <Box as="span" flex='1' textAlign='left' fontWeight='500' >
-      {<Accordiancontentss/> } 
-    </Box>
-
-)
-}
+  const { colorMode, toggleColorMode } = useColorMode()
+ const {isAuth,loginUser,mainpageinfo,setmainpageinfo} =useContext(AuthContext)
 
 
 const SignupForm = () => {
@@ -148,7 +56,7 @@ return( <Alert
    Verigy your email
   </AlertTitle>
   <AlertDescription maxWidth='sm'>
- {/* { alert(JSON.stringify(values, null, 2))} */}
+ { alert(JSON.stringify(values, null, 2))} 
    
     Thanks for submitting your application. Our team will get back to you soon.
   </AlertDescription>
@@ -277,7 +185,7 @@ function PriceWrapper({ children }) {
 
 function ThreeTierPricing() {
   return (
-    <Box   w='100vh' placement='center' bg='whiteAlpha.900'>
+    <Box   w='max-content' placement='center' bg='whiteAlpha.900' size='4xl'>
       <VStack spacing={2} textAlign="center">
         <Heading as="h1" fontSize="4xl">
           Plans that fit your need
@@ -292,8 +200,8 @@ function ThreeTierPricing() {
         textAlign="center"
         justify="center"
         spacing={{ base: 4, lg: 10 }}
-        z-index={22}
-        py={10}>
+        z-index={2}
+        py={5}>
         <PriceWrapper>
           <Box py={4} px={12}>
             <Text fontWeight="500" fontSize="2xl">
@@ -360,7 +268,7 @@ function ThreeTierPricing() {
               <Text fontWeight="500" fontSize="2xl">
                 Growth
               </Text>
-              <HStack justifyContent="center">
+              <HStack justifyContent="center"    >
                 <Text fontSize="3xl" fontWeight="600">
                   $
                 </Text>
@@ -373,7 +281,7 @@ function ThreeTierPricing() {
               </HStack>
             </Box>
             <VStack
-              bg={useColorModeValue('gray.50', 'gray.700')}
+              bg={useColorModeValue('gray.500', 'gray.700')}
               py={4}
               borderBottomRadius={'xl'}>
               <List spacing={3} textAlign="start" px={12}>
@@ -466,7 +374,7 @@ const{isOpen:ismap,onOpen:showmap,onClose:closemap}=useDisclosure()
       } = useDisclosure({ defaultIsOpen: true })
     
       return( 
-      <Box  position='fixed' top={0} z-index={100} bgColor='cream' right={0} left={0} mb={8}  boxShadow='xl' rounded='sm' bg='white'>
+      <Box  position='fixed' top={0} z-index={100} bgColor='cream' right={0} left={0} mb={8}  boxShadow='md' rounded='sm' bg='white'>
       
   {    isVisible ? (
         <Flex w='100%' margin='auto' h='1cm' backgroundColor='cyan' >
@@ -492,49 +400,24 @@ const{isOpen:ismap,onOpen:showmap,onClose:closemap}=useDisclosure()
   <Flex  align='center' mr='30px'
  justify='flex-end' 
  justifyContent='space-between'
- alignItems='center'>
+ alignItems='center'
+ color={useColorModeValue('black.500', 'white.400')}
+ bgColor={useColorModeValue('white.400','gray.600')}
+ >
  
  
  
 
-<HStack w='47%' alignItems='flex-end' mx='70px' >
+<HStack w={{xl:'47%',md:'20%',base:'15%'}} alignItems='flex-end' mx={{xl:'70px',md:'20px',sm:'10px',base:'0'}} >
 <Center>
-<Image maxW='2cm'   src='https://i.ibb.co/J5WLcDd/Logo-Wrap-up-Project-Company.png' />
-  <Text size='xl'  >Wrap-Up</Text>
+<Image maxW='1.5cm'  _hover={{zoom:'2'  }}   src='https://i.ibb.co/J5WLcDd/Logo-Wrap-up-Project-Company.png' />
+  <Heading size='sm'  >Wrap-Up</Heading>
   </Center>
   
-  <Popover boundary  PopoverContent bg='whiteAlpha.900' >
-  <PopoverTrigger>
-    <Button>Why us</Button>
-  </PopoverTrigger>
-  <PopoverContent w='full'>
-    {/* <PopoverArrow />
-    <PopoverCloseButton /> */}
- 
- <PopoverBody w='100%' px={20} bg='whiteAlpha.900' > 
-{<ThreeTierPricing/>}
-    {/* {<Manageaccordian />} */}
-
-  </PopoverBody> 
-  </PopoverContent>
-</Popover>
-
-
-
-
-
-
-
-
-{/*   
-  {<Manageaccordian heads='Why Us?' />}
-  {<Manageaccordian heads='Features' />} */}
- {/*  {<Manageaccordian heads='Resources' />}
-  {<Manageaccordian heads='pricing' />} */}
 </HStack>
 
 <Spacer/>
-<HStack  w='30%' align='center' mr='30px'
+<HStack  w={{xl:'30%',md:'50%'}}  display={{md:'none',base:'none',xl:'flex'}}   align='center' mr='30px'
  justify='flex-end' 
  justifyContent='space-between'
  alignItems='center'
@@ -550,7 +433,7 @@ const{isOpen:ismap,onOpen:showmap,onClose:closemap}=useDisclosure()
   </Tooltip>
   <PopoverContent w='full'>
 
-  <PopoverBody w='100%' px={20} bg='whiteAlpha.900' > 
+  <PopoverBody w={{xl:'100%',md:'40%',base:'20%'}} px={20} bg='whiteAlpha.900' > 
 {<ThreeTierPricing/>}
     
   </PopoverBody> 
@@ -568,14 +451,28 @@ const{isOpen:ismap,onOpen:showmap,onClose:closemap}=useDisclosure()
   <Text> Login</Text>
     
   </Tooltip>
-  <Tooltip label='' >
-  <Button bg='green.400' color='white' onClick={onlogin}  >
+  <Tooltip label='Free for 15 days' >
+  <Button bg='green.400' color='white' onClick={onlogin} width='fit-content' display='block' >
+    Start for Free
+  </Button>
+    
+  </Tooltip>
+  <Button
+          aria-label="Toggle Color Mode"
+          onClick={toggleColorMode}
+          _focus={{ boxShadow: 'none' }}
+          w="fit-content"
+          {...props}>
+          {colorMode === 'light' ? <BsMoonStarsFill  boxSize={8} /> : <BsSun   boxSize={8}/>}
+        </Button>
+</HStack>
+<Tooltip label='Free for 15 days' >
+  <Button bg='green.400' color='white' onClick={onlogin}  display={{xl:'none',base:'block'}}  w='max-content' _hover={{bg:'green.700',color:'white'}}  >
     Start for Free
   </Button>
     
   </Tooltip>
 
-</HStack>
   </Flex>
 {
 islogin && <Freetrialdrawer   isOpen={islogin} onOpen={onlogin} onClose={closelogin} /> 

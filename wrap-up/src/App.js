@@ -1,25 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
-import Workpage from './Dashboard/Workpage';
 import MainHomepage from './Homepage/Components/MainHomepage';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from './RoutesPage/AuthContextProvider';
 import AllRouter from './RoutesPage/AllRouter';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Route, useNavigate } from 'react-router-dom';
+import Mainworkpage from './Dashboard/Mainworkpage';
+import ErrorPage from './Dashboard/ErrorPage';
 
 
 
 function App() {
-  const{isAuth} =useContext(AuthContext)
+  const{isAuth,setAuth} =useContext(AuthContext)
+let Navigate=useNavigate()
+
   return (
     <div className="App">
-   {/* {
-isAuth?<Navigate to='/workpage'/> :<Navigate to='/' />
-
-   } */}
-   {/* {isAuth?<Workpage/>:  <MainHomepage/>} */}
-  {/* <AllRouter/> */}
-  <Workpage/>
+      
+      
+  
+{
+  isAuth==true?<Mainworkpage/> :<MainHomepage/>
+}
+{/* <AllRouter/>   */}
     </div>
   );
 }

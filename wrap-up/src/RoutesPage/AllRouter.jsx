@@ -1,8 +1,9 @@
 import React from 'react'
-import { BrowserRouter, Route,Routes, Link } from "react-router-dom";
-import ErrorPage from '../Dashboard/ErrorPage';
+import {  Route,Routes } from "react-router-dom";
 
-import Workpage from '../Dashboard/Workpage';
+import ErrorPage from '../Dashboard/ErrorPage';
+import Mainworkpage from '../Dashboard/Mainworkpage';
+
 import MainHomepage from '../Homepage/Components/MainHomepage';
 import Privateroute from './Privateroute';
 const AllRouter = () => {
@@ -11,7 +12,7 @@ const AllRouter = () => {
  <Routes>
 <Route path='/' element={<MainHomepage/>}   />
 <Route path='/workpage' element={<Privateroute>
-    <Workpage/>
+    <Mainworkpage />
 </Privateroute>
 
 } />

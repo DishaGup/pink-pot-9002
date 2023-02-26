@@ -1,16 +1,16 @@
 import {Avatar,chakra,SimpleGrid,useColorModeValue,Container,Image,Box, VStack, Heading, Stack,Spacer,Text,Button, 
-  HStack, AspectRatio, Flex, Link,Icon, Divider } from '@chakra-ui/react'
+  HStack,  Flex, Link,Icon, Divider } from '@chakra-ui/react'
 import React from 'react'
-import {ArrowForwardIcon} from '@chakra-ui/icon'
+
 import {FcRight} from "react-icons/fc"
 
 const Herobannerpage = () => {
  
 
- const AfterherobannerPage=({backcolor,headss,paragraph,spans,linktext,source,color,rowoppo=false  })=>{
+ const AfterherobannerPage=({backcolor,headss,paragraph,spans,linktext,source,color,rowoppo=false,mt='0'  })=>{
 
 return(
-<Box h='fit-content' backgroundColor= {backcolor} my={5} boxShadow={{md:'xl',base:'',xl:''}} p='2' rounded='md' zIndex='-1'>
+<Box h='fit-content' mt={mt} backgroundColor= {backcolor} my={5} boxShadow={{md:'xl',base:'',xl:''}} p='2' rounded='md' zIndex='-1'>
 
 <Flex   w='95%'  h='fit-content'>
  
@@ -29,7 +29,7 @@ return(
 </VStack>
 
 <Box w={{xl:'50%',md:'70%',base:'90%'}} >
-{/* //  w={{base:'9%',md:'95%',xl:'50%'}} > */}
+
 <Image  w={{xl:'94%',md:'90%',base:'80%' }} objectFit='cover' src={source}  />
 
 </Box>
@@ -272,13 +272,14 @@ function TestimonialCard(props) {
    </Box>
 
 
-
+  
 
   
    </Box>
    <Divider/>
+   {/* <svg   xmlns="http://www.w3.org/2000/svg" viewBox="0 -100 1140 320"><path fill="#181f38" fill-opacity="12" d="M0,96L40,85.3C80,75,160,53,240,85.3C320,117,400,203,480,224C560,245,640,203,720,170.7C800,139,880,117,960,101.3C1040,85,1120,75,1200,85.3C1280,96,1360,128,1400,144L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg> */}
    <AfterherobannerPage backcolor='#181f38' headss='Wall to Wall, We Do it All' paragraph='Wrike Lightspeed, the latest innovation of Wrike’s platform, makes it easy for every team to find the fastest way to productivity by working as one. Tap into the most powerful work management solution without tradeoffs and experience
- configurability, scalability, and ease of use — all at once.' color='white'
+ configurability, scalability, and ease of use — all at once.' color='white' mt='-30px'
    spans='WRIKE LIGHTSPEED IS HERE'linktext='Learn more'source='https://web-static.wrike.com/cdn-cgi/image/format=auto,quality=80,width=615,dpr=2/tp/storage/uploads/18695481-7007-4fb2-86b9-e837ec726ede/lightspeed-promo-analyze-2x.png'  />
 <AfterherobannerPage  source='https://web-static.wrike.com/tp/storage/uploads/772ccef9-5cc8-498d-81d3-c4dae398dfb3/product-screenshot-cit.png' 
 spans='NEW RELEASE' linktext='Learn more' color='black' rowoppo={true}
