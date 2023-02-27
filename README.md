@@ -16,7 +16,7 @@ Tech Stack-
 
 Some Photos of a website-
 
-![Homepage]("C:\Users\uttam\Pictures\Screenshots\Screenshot (572).png")
+![Homepage]("C:\Users\uttam\Pictures\Screenshots\Screenshot(572).png")
 <br/>
-![Workpage]("C:\Users\uttam\Pictures\Screenshots\Screenshot (573).png")
+![Workpage]("C:\Users\uttam\Pictures\Screenshots\Screenshot(573).png")
 
