@@ -15,8 +15,8 @@ Tech Stack-
 
 
 Some Photos of a website-
-![Screenshot (573).png](https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-02-27/Screenshot%20%28573%29_445751.png)
-<!-- ![Homepage](C:\Users\uttam\Pictures\Screenshots\Screenshot(572).png) -->
+![Homepage](https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-02-27/Screenshot%20%28572%29_139166.png)
 <br/>
-<!-- ![Workpage](C:\Users\uttam\Pictures\Screenshots\Screenshot(573).png) -->
+![Workpage](https://masai-course.s3.ap-south-1.amazonaws.com/editor/uploads/2023-02-27/Screenshot%20%28573%29_445751.png)
+
 
