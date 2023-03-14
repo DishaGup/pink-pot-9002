@@ -1,7 +1,7 @@
 ## pink-pot-9002
 
 <h1><Strong>Wrike Clone (Frontend)</Strong> <h1>
-<h5  ><a href='https://wrap-up.vercel.app/' target='_blank' >Deployed Link</a></h5>
+<h5  ><a href='https://wrap-up.vercel.app/' target='_blank' >Deployed Link</a> url</h5>
 <h3> So what is WRIKE.com? </h3> 
 
 <p>Wrike is a project management company. It lets users to set the timeline, divides the task among team collaboators, and reminds them with the task and deadlines. It also offers user a template category to create their own space. </p> 
