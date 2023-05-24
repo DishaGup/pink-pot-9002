@@ -18,29 +18,32 @@ import {
   import {FcGlobe,FcAssistant} from "react-icons/fc"
   import { FaCheckCircle } from 'react-icons/fa';
 import { AuthContext } from '../../RoutesPage/AuthContextProvider';
+import LoginModal from './LoginModal';
 
 
-const Navbar = (props: ButtonProps) => {
+const Navbar = (props) => {
 
   const { colorMode, toggleColorMode } = useColorMode()
- const {isAuth,loginUser,mainpageinfo,setmainpageinfo} =useContext(AuthContext)
+ const {isAuth,loginUser,mainpageinfo,setmainpageinfo,handlelogindata} =useContext(AuthContext)
 
 
 const SignupForm = () => {
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName:'',
+      firstname: '',
+      lastname:'',
       email: '',
-      project: '',
-      description:'',
+      password:'',
+      projectname: '',
+      projectdesc:'',
     },
     onSubmit: values => {
-setmainpageinfo(values)
-loginUser()
+      console.log(values,'..40')
+//setmainpageinfo(values)
+loginUser(values)
 
 // console.log(mainpageinfo)
-// console.log(values)
+console.log(values,'..45')
 return( <Alert
   status='success'
   variant='subtle'
@@ -69,21 +72,21 @@ return( <Alert
 //  console.log(mainpageinfo)
   return (
     <form onSubmit={formik.handleSubmit}>
-      <FormLabel   htmlFor="firstName">First Name</FormLabel>
+      <FormLabel   htmlFor="firstname">First Name</FormLabel>
       <Input
-        id="firstName"
-        name="firstName"
+        id="firstname"
+        name="firstname"
         type="text"
         onChange={formik.handleChange}
-        value={formik.values.firstName}
+        value={formik.values.firstname}
       />
-      <FormLabel htmlFor="lastName">Last Name</FormLabel>
+      <FormLabel htmlFor="lastname">Last Name</FormLabel>
       <Input
-        id="lastName"
-        name="lastName"
+        id="lastname"
+        name="lastname"
         type="text"
         onChange={formik.handleChange}
-        value={formik.values.lastName}
+        value={formik.values.lastname}
       />
       <FormLabel htmlFor="email">Email Address</FormLabel>
       <Input
@@ -93,21 +96,29 @@ return( <Alert
         onChange={formik.handleChange}
         value={formik.values.email}
       />
-        <FormLabel htmlFor="project">Project name</FormLabel>
+        <FormLabel htmlFor="password">Password</FormLabel>
       <Input
-        id="project"
-        name="project"
+        id="password"
+        name="password"
         type="text"
         onChange={formik.handleChange}
-        value={formik.values.project}
+        value={formik.values.password}
       />
-        <FormLabel htmlFor="email">Write project's description</FormLabel>
+        <FormLabel htmlFor="projectname">Project name</FormLabel>
       <Input
-        id="description"
-        name="description"
+        id="projectname"
+        name="projectname"
         type="text"
         onChange={formik.handleChange}
-        value={formik.values.description}
+        value={formik.values.projectname}
+      />
+        <FormLabel htmlFor="projectdesc">Write project's description</FormLabel>
+      <Input
+        id="projectdesc"
+        name="projectdesc"
+       type="text"
+        onChange={formik.handleChange}
+        value={formik.values.projectdesc}
       />
      
       <Button my={5} colorScheme='pink' type="submit">Submit</Button>
@@ -141,12 +152,7 @@ const Freetrialdrawer=({ isOpen, onOpen, onClose })=>{
 
           </DrawerBody>
 
-          <DrawerFooter borderTopWidth='1px'>
-        <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-         
-          </DrawerFooter>
+   
         </DrawerContent>
       </Drawer>
     </>
@@ -203,7 +209,7 @@ function ThreeTierPricing() {
         z-index={2}
         py={5}>
         <PriceWrapper>
-          <Box py={4} px={12}>
+          <Box py={4} px={12}  bg={useColorModeValue('gray.50', 'gray.700')}>
             <Text fontWeight="500" fontSize="2xl">
               Hobby
             </Text>
@@ -264,7 +270,7 @@ function ThreeTierPricing() {
                 Most Popular
               </Text>
             </Box>
-            <Box py={4} px={12}>
+            <Box py={4} px={12}  bg={useColorModeValue('gray.50', 'gray.700')}>
               <Text fontWeight="500" fontSize="2xl">
                 Growth
               </Text>
@@ -281,7 +287,7 @@ function ThreeTierPricing() {
               </HStack>
             </Box>
             <VStack
-              bg={useColorModeValue('gray.500', 'gray.700')}
+              bg={useColorModeValue('gray.50', 'gray.700')}
               py={4}
               borderBottomRadius={'xl'}>
               <List spacing={3} textAlign="start" px={12}>
@@ -315,7 +321,7 @@ function ThreeTierPricing() {
           </Box>
         </PriceWrapper>
         <PriceWrapper>
-          <Box py={4} px={12}>
+          <Box py={4} px={12}  bg={useColorModeValue('gray.50', 'gray.700')}>
             <Text fontWeight="500" fontSize="2xl">
               Scale
             </Text>
@@ -364,9 +370,9 @@ function ThreeTierPricing() {
 
 
 
+const { isOpen:isregister, onOpen:onregister, onClose:closeregister } = useDisclosure()
+const{ isOpen:ismap,onOpen:showmap,onClose:closemap}=useDisclosure()
 const { isOpen:islogin, onOpen:onlogin, onClose:closelogin } = useDisclosure()
-const{isOpen:ismap,onOpen:showmap,onClose:closemap}=useDisclosure()
-
     const {
         isOpen: isVisible,
         onClose,
@@ -374,7 +380,7 @@ const{isOpen:ismap,onOpen:showmap,onClose:closemap}=useDisclosure()
       } = useDisclosure({ defaultIsOpen: true })
     
       return( 
-      <Box  position='fixed' top={0} z-index={100} bgColor='cream' right={0} left={0} mb={8}  boxShadow='md' rounded='sm' bg='white'>
+      <Box  position='sticky' top={0} z-index={100} bgColor='cream' right={0} left={0} mb={8}  boxShadow='md' rounded='sm' bg='white'>
       
   {    isVisible ? (
         <Flex w='100%' margin='auto' h='1cm' backgroundColor='cyan' >
@@ -408,9 +414,9 @@ const{isOpen:ismap,onOpen:showmap,onClose:closemap}=useDisclosure()
  
  
 
-<HStack w={{xl:'47%',md:'20%',base:'15%'}} alignItems='flex-end' mx={{xl:'70px',md:'20px',sm:'10px',base:'0'}} >
+<HStack w={{xl:'47%',md:'20%',base:'15%'}} alignItems='flex-end' mx={{xl:'70px',md:'20px',sm:'10px',base:'0'}} zIndex={'8000'} >
 <Center>
-<Image maxW='1.5cm'  _hover={{zoom:'2'  }}   src='https://i.ibb.co/J5WLcDd/Logo-Wrap-up-Project-Company.png' />
+<Image maxW='1.5cm'  src='https://i.ibb.co/J5WLcDd/Logo-Wrap-up-Project-Company.png' />
   <Heading size='sm'  >Wrap-Up</Heading>
   </Center>
   
@@ -443,16 +449,16 @@ const{isOpen:ismap,onOpen:showmap,onClose:closemap}=useDisclosure()
 
 
 
-  <Tooltip label='Choose your Language.' >
-  <Text  onClick={showmap} onClose={closemap} > <Icon as={FcGlobe} />En</Text>
+  <Tooltip label='Choose your Area.' >
+  <Text  onClick={showmap} onClose={closemap} > <Icon as={FcGlobe} /></Text>
     
   </Tooltip>
   <Tooltip label='Let us help you' >
-  <Text> Login</Text>
+  <Text  onClick={onlogin} onClose={closelogin} > Login</Text>
     
   </Tooltip>
   <Tooltip label='Free for 15 days' >
-  <Button bg='green.400' color='white' onClick={onlogin} width='fit-content' display='block' >
+  <Button bg='green.400' color='white' onClick={onregister} width='fit-content' display='block' >
     Start for Free
   </Button>
     
@@ -467,7 +473,7 @@ const{isOpen:ismap,onOpen:showmap,onClose:closemap}=useDisclosure()
         </Button>
 </HStack>
 <Tooltip label='Free for 15 days' >
-  <Button bg='green.400' color='white' onClick={onlogin}  display={{xl:'none',base:'block'}}  w='max-content' _hover={{bg:'green.700',color:'white'}}  >
+  <Button bg='green.400' color='white' onClick={onregister}  display={{xl:'none',base:'block'}}  w='max-content' _hover={{bg:'green.700',color:'white'}}  >
     Start for Free
   </Button>
     
@@ -475,11 +481,14 @@ const{isOpen:ismap,onOpen:showmap,onClose:closemap}=useDisclosure()
 
   </Flex>
 {
-islogin && <Freetrialdrawer   isOpen={islogin} onOpen={onlogin} onClose={closelogin} /> 
+isregister && <Freetrialdrawer   isOpen={isregister} onOpen={onregister} onClose={closeregister} /> 
 
 }
 {
   ismap && <Openmap isOpen={ismap} onOpen={showmap} onClose={closemap} />
+}
+{
+  islogin && <LoginModal   isOpen={islogin}  onOpen={onlogin} onClose={closelogin} />
 }
 
       </Box>)
