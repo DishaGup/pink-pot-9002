@@ -2,7 +2,7 @@
 import React, { createContext, useState } from 'react'
 import {data} from '../login'
 import axios from 'axios'
-
+import { useColorMode } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
 //  http://localhost:8080
 export const deployURL='https://erin-dizzy-clam.cyclic.app'
@@ -16,9 +16,27 @@ const AuthContextProvider = ({children}) => {
     const activeTodos = task.filter(todo => !todo.status);
     const visibleTodos = showActive ? activeTodos : task;
     const[mainpageinfo,setmainpageinfo]=useState([])
+    const { colorMode, toggleColorMode } = useColorMode()
     const toast = useToast()
-  console.log(mainpageinfo,'..mainpageinfo')
-  //console.log(data)
+ 
+
+const handleedituserdetails=async(id)=>{
+  try {
+    const response = await axios.patch(`${deployURL}/wrapup/users/update/${localStorage.getItem("user_id")}`,{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      }
+    })
+  //  console.log(response,'...94')
+    setmainpageinfo(response.data.users)
+  
+} catch (error) {
+  console.log(error)
+}
+
+}
+
+
   const handledelete = async(id) => {
    
     try {
@@ -129,7 +147,7 @@ const handlelogindata=async(values)=>{
 
 
 
-const value={handlelogindata,handlefetchuserdetails,handledelete,handletoggle,isAuth,handlefetchtask,registerUser,logoutUser,setShowActive,showActive,task,settask,activeTodos,visibleTodos,handlesubmittask,mainpageinfo,setmainpageinfo}
+const value={colorMode,handleedituserdetails,toggleColorMode,handlelogindata,handlefetchuserdetails,handledelete,handletoggle,isAuth,handlefetchtask,registerUser,logoutUser,setShowActive,showActive,task,settask,activeTodos,visibleTodos,handlesubmittask,mainpageinfo,setmainpageinfo}
     return (
 
 

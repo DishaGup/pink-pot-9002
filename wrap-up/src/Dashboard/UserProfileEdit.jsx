@@ -1,11 +1,21 @@
 import {
   Button, Flex, FormControl,FormLabel,Heading,Input,Stack,useColorModeValue,HStack,
   Avatar, AvatarBadge, IconButton, Center, Modal, ModalOverlay,ModalContent, ModalHeader,
-  ModalFooter, ModalBody, ModalCloseButton} from '@chakra-ui/react';
-import React from 'react';
+  ModalFooter, ModalBody, ModalCloseButton, Toast, useToast} from '@chakra-ui/react';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '../RoutesPage/AuthContextProvider';
+import { useEffect } from 'react';
 
 
-export default function UserProfileEdit({ isOpen, onOpen, onClose }){
+ function UserProfileEdit({ isOpen, onOpen, onClose }){
+  const {mainpageinfo,handleedituserdetails} =useContext(AuthContext)
+let [obj,setobj]=useState(mainpageinfo[0])
+ 
+  console.log(obj)
+ 
+
+let {firstname,lastname,email,password,projectname,projectdesc}=obj
+const toast=useToast()  
 
  function InitialFocus() {
     
@@ -25,22 +35,23 @@ export default function UserProfileEdit({ isOpen, onOpen, onClose }){
           >
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader>Check your account details</ModalHeader>
+              <ModalHeader>  <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
+          User Profile Edit
+        </Heading>Check your account details</ModalHeader>
               <ModalCloseButton />
               <ModalBody pb={6}>
-                {/* <FormControl>
+              <FormControl>
                   <FormLabel>First name</FormLabel>
-                  <Input ref={initialRef} placeholder='First name' />
+                  <Input ref={initialRef} placeholder='First name' value={firstname} onChange={(e)=>setobj({...obj,firstname:e.target.value})} />
                 </FormControl>
     
                 <FormControl mt={4}>
                   <FormLabel>Last name</FormLabel>
-                  <Input placeholder='Last name' />
-                </FormControl> */}
+                  <Input placeholder='Last name' value={lastname}  onChange={(e)=>setobj({...obj,lastname:e.target.value})} />
+                </FormControl> 
  
  <Flex
-      minH={'100vh'}
-      align={'center'}
+          align={'center'}
       justify={'center'}
       bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack
@@ -48,13 +59,8 @@ export default function UserProfileEdit({ isOpen, onOpen, onClose }){
         w={'full'}
         maxW={'md'}
         bg={useColorModeValue('white', 'gray.700')}
-        rounded={'xl'}
-        boxShadow={'lg'}
-        p={6}
-        my={12}>
-        <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
-          User Profile Edit
-        </Heading>
+            p={6}
+        my={10}>   
         <FormControl id="userName">
           <FormLabel>User Icon</FormLabel>
           <Stack direction={['column', 'row']} spacing={6}>
@@ -68,29 +74,28 @@ export default function UserProfileEdit({ isOpen, onOpen, onClose }){
                   colorScheme="red"
                   aria-label="remove Image"
                   
-                  // icon={<SmallCloseIcon />}
-                />
+                      />
               </Avatar>
             </Center>
             <Center w="full">
-              <Button w="full">Change Icon</Button>
+              <Button w="full"  onClick={()=>toast({
+                position:'top',
+                title:'No Change',
+                description:'you can not change this!',
+                duration:3000,
+                closable:true,
+              })} >Change Icon</Button>
             </Center>
           </Stack>
         </FormControl>
-        <FormControl id="userName" isRequired>
-          <FormLabel>User name</FormLabel>
-          <Input
-            placeholder="UserName"
-            _placeholder={{ color: 'gray.500' }}
-            type="text"
-          />
-        </FormControl>
-        <FormControl id="email" isRequired>
+          <FormControl id="email" isRequired>
           <FormLabel>Email address</FormLabel>
           <Input
             placeholder="your-email@example.com"
             _placeholder={{ color: 'gray.500' }}
             type="email"
+            value={email}
+            onChange={(e)=>setobj({...obj,email:e.target.value})} 
           />
         </FormControl>
         <FormControl id="password" isRequired>
@@ -99,29 +104,10 @@ export default function UserProfileEdit({ isOpen, onOpen, onClose }){
             placeholder="password"
             _placeholder={{ color: 'gray.500' }}
             type="password"
+            onChange={(e)=>setobj({...obj,password:e.target.value})} 
           />
         </FormControl>
-        <Stack spacing={6} direction={['column', 'row']}>
-          <Button
-            bg={'red.400'}
-            color={'white'}
-            w="full"
-            _hover={{
-              bg: 'red.500',
-            }}>
-            Cancel
-          </Button>
-          <Button
-            bg={'blue.400'}
-            color={'white'}
-            w="full"
-            _hover={{
-              bg: 'blue.500',
-            }}>
-            Submit
-          </Button>
-        </Stack>
-      </Stack>
+           </Stack>
     </Flex>
 
 
@@ -130,7 +116,7 @@ export default function UserProfileEdit({ isOpen, onOpen, onClose }){
               </ModalBody>
     
               <ModalFooter>
-                <Button colorScheme='blue' mr={3}>
+                <Button colorScheme='blue' mr={3}  onClick={handleedituserdetails} >
                   Save
                 </Button>
                 <Button onClick={onClose}>Cancel</Button>
@@ -163,3 +149,4 @@ return (
 
   );
 }
+export default UserProfileEdit

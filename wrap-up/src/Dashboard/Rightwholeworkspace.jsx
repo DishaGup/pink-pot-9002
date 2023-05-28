@@ -10,7 +10,7 @@ import { AuthContext } from '../RoutesPage/AuthContextProvider'
 
  export default  function Rightwholeworkspace (){
 
-const{visibleTodos,task,setShowActive,handlefetchtask,showActive,mainpageinfo,handledelete,handletoggle}=useContext(AuthContext)
+const{colorMode,visibleTodos,task,setShowActive,handlefetchtask,showActive,mainpageinfo,handledelete,handletoggle}=useContext(AuthContext)
 
 const{firstname,lastname,projectname,projectdesc} =mainpageinfo
 const choosecolor=['blue','pink','purple','cyan','green','whatsapp','red','bloodymoon','brown','crimson','peach','facebook','teal','twitter','peachpuff','yellow','violet','snow','gray','slate','telegram']
@@ -20,9 +20,9 @@ useEffect(()=>{
   },[])
   
     return (
-      <TableContainer w='full' gap='20px'  overflowX='hidden'  overflowY='auto' boxShadow='2xl' borderRadius={8}>
+      <TableContainer w='full' gap='20px'  minHeight={'5rem'} overflowX='auto'  overflowY='auto' boxShadow='2xl' borderRadius={8}>
         <Table variant='simple' colorScheme='pink' rowGap='50px'  >
-          <TableCaption   >
+          <TableCaption  mt='80px'  >
             <Heading size='md' >{ projectname?`${projectname} project `:' No tasks to work on'}</Heading> 
             Here you’ll see tasks assigned to you.</TableCaption>
           <Thead border='2 px solid red' borderColor='#FED7E2'>
@@ -39,7 +39,11 @@ useEffect(()=>{
           </Thead>
           <Tbody rowGap={5} fontSize='18px' >
            {
-           task && task.length != 0 ? (task.map((el) => (
+         
+           
+
+
+           visibleTodos && visibleTodos.length >0 ? (visibleTodos.map((el) => (
    
              <Tr   key={el._id} > 
             <Link  to={`/workpage/single/${el._id}`} >     <Td  fontWeight='600' textDecoration={el?.status?'line-through':''}    color={`${choosecolor[Math.floor(Math.random()*20)]}`} >{el?.title}</Td>

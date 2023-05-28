@@ -19,14 +19,18 @@ import Contact from './Contact'
 import UserProfileEdit from './UserProfileEdit'
 import Videoplayer from './Videoplayer'
 const NavbarDashboard = (props) => {
-    const {handlefetchtask,isAuth,logoutUser,visibleTodos,task,setShowActive,handlesubmittask,mainpageinfo} =useContext(AuthContext)
-    // const [task, settask] = useState([])
+    const {colorMode,toggleColorMode,handlefetchtask,isAuth,logoutUser,visibleTodos,task,setShowActive,handlesubmittask,mainpageinfo} =useContext(AuthContext)
+ 
     const { isOpen: isdashboard, onOpen: opendash, onClose } = useDisclosure()
     const { isOpen: iscontact, onOpen: opencontact, onClose:closecontact } = useDisclosure()
-    //const[contact,setcontact]=useBoolean()
    
-  
-    //console.log(mainpageinfo)
+    var firstname = 'newbie'
+    var lastname = '';
+     var projectname='fr'
+    if(mainpageinfo.length==1) { 
+     firstname=mainpageinfo[0].firstname
+     lastname=mainpageinfo[0].lastname
+    }
     
     const navigate=useNavigate()
     const [typetask, settypetask] = useState('')
@@ -34,7 +38,7 @@ const NavbarDashboard = (props) => {
     const [priority,setpriority]=useState('')
     const [desc,setdesc]=useState('')
     const isError = task === ''
-    const { colorMode, toggleColorMode } = useColorMode()
+   
     const { isOpen:isprofile , onOpen:openprofile, onClose:closeprofile } = useDisclosure()
     const { isOpen:isvideo, onOpen:openvideo, onClose:closevideo } = useDisclosure()
     function Drawerburgerdashboard({ isOpen, onClose, firstField }) {
@@ -102,7 +106,7 @@ const NavbarDashboard = (props) => {
         )
       }
  
-      const{firstname,lastname,projectname} =mainpageinfo
+     
     
     const { isOpen: istaskhere, onOpen: opentask, onClose: closetaskhere } = useDisclosure()
     return (

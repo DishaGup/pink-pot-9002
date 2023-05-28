@@ -1,15 +1,17 @@
 import React from 'react'
-import { useDrag, useDrop } from 'react-dnd';
+
 
 import {
     Box, Table, Text, Link, Image, Thead,  Tbody, Tr, Th, Td, TableCaption, TableContainer, CloseButton, HStack,  VStack, UnorderedList, ListItem, 
     useDisclosure,Button } from '@chakra-ui/react'
   import { FcTodoList, FcPhoneAndroid, FcContacts, FcSmartphoneTablet} from 'react-icons/fc'
   import { Icon } from '@chakra-ui/react'
+import { useContext } from 'react'
+import { AuthContext } from '../RoutesPage/AuthContextProvider'
   
 
   const LeftWholeWorkspace = () => {
-   
+let {colorMode}=useContext(AuthContext)
 
     const Addsonleftworkspace = ({ src, textss, badgetext, colors, childrens }) => {
 
@@ -23,7 +25,7 @@ import {
           <>
             {isVisible ? (
     
-              <Box bgColor={colors} borderRadius={8} wrap='wrap' m='10px' p='10px' color='black.700' textColor='blackAlpha.700' >
+              <Box bgColor={colorMode=="light"? colors :"gray.500"} borderRadius={8} wrap='wrap' m='10px' p='10px' color={colorMode=="light"?'black.700':"cream"} textColor={colorMode=="light"?'blackAlpha.700':'cream'} >
                 <CloseButton size='md' onClick={onClose} />
                 <HStack>
     
@@ -31,7 +33,7 @@ import {
                     <Icon as={src} boxSize={8} />
                   </Box>
     
-                  <VStack flexBasis={1} textAlign='left' align='flex-start' color='black.700' >
+                  <VStack flexBasis={1} textAlign='left' align='flex-start' color={colorMode=="light"?'blackAlpha.700':'cream'} >
                     <Text>{textss}</Text>
                     {childrens}
                     <Button variant='outline' p={1} borderRadius={7} >{badgetext}</Button>
@@ -56,7 +58,7 @@ import {
     
         return (
     
-          <UnorderedList px={5} >
+          <UnorderedList px={5}  color={colorMode=="light"?'blackAlpha.700':'cream'}>
             <ListItem> You’re assigned a new task or project
             </ListItem>
             <ListItem> You’re @mentioned by someone else
@@ -73,8 +75,20 @@ import {
 
 
   return (
-    <DraggableTableContainer>  
-      <Table variant='simple' colorScheme='pink' rowGap='50px'  overflowY='auto' >
+    <TableContainer
+    w='content-fit'
+    gap='10px'
+    maxWidth='100%'
+    p={3}
+    overflowY='auto'
+    zIndex={-1}
+    borderRadius={8}
+    border='2px'
+   
+    overflowX={'auto'}
+    borderColor='#FED7E2'>
+  
+      <Table variant='simple'  colorScheme='pink' rowGap='50px'  overflowY='auto' >
       
         <TableCaption border='2 px solid red' borderColor='#FED7E2'>Missing something? Tell us what you’d like to see on your Home page.</TableCaption>
         <Thead>
@@ -102,38 +116,10 @@ import {
           </Tr>
         </Tbody>
 
-      </Table>
-      </DraggableTableContainer>)
+      </Table>   </TableContainer>)
+    
 }
 
 export default LeftWholeWorkspace
 
 
-
-export const DraggableTableContainer = ({ children }) => {
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: 'TABLE_CONTAINER' },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
-
-  return (
-    <div  ref={drag}>  
-    <TableContainer
-      w='content-fit'
-      gap='10px'
-      maxWidth='100%'
-      p={3}
-      overflowY='auto'
-      zIndex={-1}
-      borderRadius={8}
-      border='2px'
-      borderColor='#FED7E2'
-     
-      opacity={isDragging ? 0.5 : 1}
-    >
-      {children}
-    </TableContainer> </div>
-  );
-};
