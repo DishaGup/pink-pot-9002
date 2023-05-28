@@ -17,12 +17,7 @@ let Navigate=useNavigate()
   return (
     <div className="App">
       
-      
-  
-{
-  isAuth==true?<Mainworkpage/> :<MainHomepage/>
-}
-{/* <AllRouter/>   */}
+     <AllRouter/>  
     </div>
   );
 }

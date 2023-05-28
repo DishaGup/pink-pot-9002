@@ -25,7 +25,7 @@ return(
 <UnorderedList listStyleType='none'  >
 <Heading size='md'  pb='4' pl='2' >Product</Heading>
 
-{ footeronelistone.map((el)=> <ListItem p='5px' gap='10px'   _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
+{ footeronelistone.map((el,index)=> <ListItem p='5px' gap='10px' key={index}  _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
 
 </UnorderedList>
 </GridItem>
@@ -34,7 +34,7 @@ return(
 <UnorderedList listStyleType='none' >
 <Heading size='md'  pb='4' pl='2' >Solutions</Heading>
 
-{ footeronelisttwo.map((el)=> <ListItem p='5px' gap='10px'   _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
+{ footeronelisttwo.map((el,index)=> <ListItem p='5px' gap='10px'  key={index} _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
 
 </UnorderedList>
 </GridItem>
@@ -43,7 +43,7 @@ return(
 <UnorderedList listStyleType='none' >
 <Heading size='md'  pb='4' pl='2' >Resources</Heading>
 
-{ footeronelistthree.map((el)=> <ListItem p='5px' gap='10px'   _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
+{ footeronelistthree.map((el,index)=> <ListItem p='5px' gap='10px' key={index}   _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
 
 </UnorderedList>
 </GridItem>
@@ -51,7 +51,7 @@ return(
 <GridItem colSpan={1}>
 <UnorderedList listStyleType='none' >
 <Heading size='md'  pb='4' pl='2' >Company</Heading>
-{ footeronelistfour.map((el)=> <ListItem p='5px' gap='10px'   _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
+{ footeronelistfour.map((el,index)=> <ListItem p='5px' gap='10px' key={index}  _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
 
 </UnorderedList>
 </GridItem>
@@ -60,7 +60,7 @@ return(
 <GridItem colSpan={1} >
 <UnorderedList listStyleType='none' >
 <Heading size='md'   pb='4' pl='2' >Guides</Heading>
-{ footeronelistfive.map((el)=> <ListItem p='5px' gap='10px'   _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
+{ footeronelistfive.map((el,ind)=> <ListItem key={ind} p='5px' gap='10px'   _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
 
 </UnorderedList>
 
@@ -69,7 +69,7 @@ return(
 <GridItem colSpan={1} mt='40px' >
 <UnorderedList listStyleType='none' >
 
-{ footeronelistsix.map((el)=> <ListItem p='5px' gap='10px'   _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
+{ footeronelistsix.map((el,ind)=> <ListItem p='5px' gap='10px' key={ind}   _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
 
 </UnorderedList>
 
@@ -78,7 +78,7 @@ return(
 <GridItem colSpan={2} >
 <UnorderedList listStyleType='none' >
 <Heading size='md'   pb='4' pl='2' >Latest in the Blog</Heading>
-{ footeronelistseven.map((el)=> <ListItem p='5px' gap='10px'   _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
+{ footeronelistseven.map((el,ind)=> <ListItem p='5px' gap='10px' key={ind} _hover={{color:'cyan',textDecoration:'underline'}}>{el}</ListItem> ) }
 
 </UnorderedList>
 

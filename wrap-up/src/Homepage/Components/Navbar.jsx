@@ -24,7 +24,7 @@ import LoginModal from './LoginModal';
 const Navbar = (props) => {
 
   const { colorMode, toggleColorMode } = useColorMode()
- const {isAuth,loginUser,mainpageinfo,setmainpageinfo,handlelogindata} =useContext(AuthContext)
+ const {isAuth,registerUser,mainpageinfo,setmainpageinfo,handlelogindata} =useContext(AuthContext)
 
 
 const SignupForm = () => {
@@ -38,12 +38,12 @@ const SignupForm = () => {
       projectdesc:'',
     },
     onSubmit: values => {
-      console.log(values,'..40')
+    //  console.log(values,'..40')
 //setmainpageinfo(values)
-loginUser(values)
+registerUser(values)
 
 // console.log(mainpageinfo)
-console.log(values,'..45')
+//console.log(values,'..45')
 return( <Alert
   status='success'
   variant='subtle'
@@ -380,10 +380,10 @@ const { isOpen:islogin, onOpen:onlogin, onClose:closelogin } = useDisclosure()
       } = useDisclosure({ defaultIsOpen: true })
     
       return( 
-      <Box  position='sticky' top={0} z-index={100} bgColor='cream' right={0} left={0} mb={8}  boxShadow='md' rounded='sm' bg='white'>
+      <Box  position='fixed' top={0} h='auto'  bgColor='cream' right={0} left={0} mb={3}  boxShadow='md' rounded='sm' bg='white'>
       
   {    isVisible ? (
-        <Flex w='100%' margin='auto' h='1cm' backgroundColor='cyan' >
+        <Flex w='100%' margin='auto' h='1cm' bgColor={'grsy.500'} >
         <Alert status='info' >
           <AlertIcon w='10% 'fontSize={32}   />
             <AlertTitle mr={2} >Meet WrapUp</AlertTitle>
@@ -407,6 +407,7 @@ const { isOpen:islogin, onOpen:onlogin, onClose:closelogin } = useDisclosure()
  justify='flex-end' 
  justifyContent='space-between'
  alignItems='center'
+ h='auto'
  color={useColorModeValue('black.500', 'white.400')}
  bgColor={useColorModeValue('white.400','gray.600')}
  >
@@ -414,7 +415,7 @@ const { isOpen:islogin, onOpen:onlogin, onClose:closelogin } = useDisclosure()
  
  
 
-<HStack w={{xl:'47%',md:'20%',base:'15%'}} alignItems='flex-end' mx={{xl:'70px',md:'20px',sm:'10px',base:'0'}} zIndex={'8000'} >
+<HStack w={{xl:'47%',md:'20%',base:'15%'}} alignItems='flex-end' mx={{xl:'70px',md:'20px',sm:'10px',base:'0'}} zIndex={'2'} >
 <Center>
 <Image maxW='1.5cm'  src='https://i.ibb.co/J5WLcDd/Logo-Wrap-up-Project-Company.png' />
   <Heading size='sm'  >Wrap-Up</Heading>

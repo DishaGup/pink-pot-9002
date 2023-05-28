@@ -1,9 +1,11 @@
-import React, { useState, useRef, useContext} from 'react'
+import React, { useState, useRef, useContext,useEffect} from 'react'
+import axios from 'axios'
 import {
     Box, Text, Link, Image, Divider, HStack, Avatar, VStack, UnorderedList, ListItem, Badge, Drawer, FormLabel, InputGroup, Select, Textarea, InputLeftAddon, InputRightAddon,
     DrawerBody, Modal, Menu, MenuButton, MenuList, MenuItem,MenuDivider,ModalOverlay,
     ModalContent,ModalHeader,ModalFooter,ModalBody,ModalCloseButton,DrawerFooter,DrawerHeader,DrawerOverlay,DrawerContent,DrawerCloseButton, useBoolean
   } from '@chakra-ui/react'
+  import {useNavigate} from 'react-router-dom'
   import { FcStart, FcTemplate,  FcAddRow, FcHome, FcAdvertising, FcSettings } from 'react-icons/fc'
   import { Icon } from '@chakra-ui/react'
   import { Button, Center, Container, Flex, Heading, Input, Spacer, Tooltip, useDisclosure, Stack, SimpleGrid, Checkbox, FormControl,FormErrorMessage,
@@ -16,16 +18,21 @@ import {
 import Contact from './Contact'
 import UserProfileEdit from './UserProfileEdit'
 import Videoplayer from './Videoplayer'
-const NavbarDashboard = (props: ButtonProps) => {
-    const {isAuth,logoutUser,visibleTodos,task,setShowActive,handlesubmittask,mainpageinfo} =useContext(AuthContext)
+const NavbarDashboard = (props) => {
+    const {handlefetchtask,isAuth,logoutUser,visibleTodos,task,setShowActive,handlesubmittask,mainpageinfo} =useContext(AuthContext)
     // const [task, settask] = useState([])
     const { isOpen: isdashboard, onOpen: opendash, onClose } = useDisclosure()
     const { isOpen: iscontact, onOpen: opencontact, onClose:closecontact } = useDisclosure()
     //const[contact,setcontact]=useBoolean()
-    const{email,firstName,lastName,project} =mainpageinfo
+   
+  
+    //console.log(mainpageinfo)
+    
+    const navigate=useNavigate()
     const [typetask, settypetask] = useState('')
     const firstField = React.useRef()
     const [priority,setpriority]=useState('')
+    const [desc,setdesc]=useState('')
     const isError = task === ''
     const { colorMode, toggleColorMode } = useColorMode()
     const { isOpen:isprofile , onOpen:openprofile, onClose:closeprofile } = useDisclosure()
@@ -94,8 +101,9 @@ const NavbarDashboard = (props: ButtonProps) => {
           </>
         )
       }
-   
-
+ 
+      const{firstname,lastname,projectname} =mainpageinfo
+    
     const { isOpen: istaskhere, onOpen: opentask, onClose: closetaskhere } = useDisclosure()
     return (
         <>
@@ -156,28 +164,31 @@ const NavbarDashboard = (props: ButtonProps) => {
                   <Avatar src='#' size='sm' />
                 </MenuButton>
               </Tooltip>
-              <MenuList>
-                <MenuItem>
-                  <HStack>
-                    <Avatar name={`${firstName} ${lastName}`}  ></Avatar>
-                    <VStack mx={6}>
-                      <Text size='19px' fontWeight={500} >{`${firstName} ${lastName}`}</Text>
-                      <Text>status</Text>
-                    </VStack>
-                  </HStack>
-                </MenuItem>
-                <MenuDivider />
-                <MenuItem>{`${firstName} ${lastName} 's team`}</MenuItem>
-                <MenuItem  onClick={openprofile}  >Settings</MenuItem>
-                <MenuItem>Apps and Integration</MenuItem>
-                <MenuItem>Upgrade</MenuItem>
-                <MenuItem>Help</MenuItem>
-                <MenuDivider />
-                <MenuItem onClick={logoutUser}  >
-                  Log Out</MenuItem>
+          { mainpageinfo && mainpageinfo.length>=1 &&<MenuList>
+              <MenuItem>
+                <HStack>
+                  <Avatar name={`${firstname} ${lastname}`}  ></Avatar>
+                  <VStack mx={6}>
+                    <Text size='19px' fontWeight={500} >{`${firstname} ${lastname}`}</Text>
+                    <Text>status</Text>
+                  </VStack>
+                </HStack>
+              </MenuItem>
+              <MenuDivider />
+              <MenuItem>{`${firstname} ${lastname} 's team`}</MenuItem>
+              <MenuItem  onClick={openprofile}  >Settings</MenuItem>
+              <MenuItem>Apps and Integration</MenuItem>
+              <MenuItem>Upgrade</MenuItem>
+              <MenuItem>Help</MenuItem>
+              <MenuDivider />
+              <MenuItem onClick={()=>{
+                localStorage.removeItem("token") 
+                navigate('/')
+              }}  >
+                Log Out</MenuItem>
 
-              </MenuList>
-            </Menu>
+            </MenuList>
+            }            </Menu>
 
 
           </HStack>
@@ -210,11 +221,16 @@ const NavbarDashboard = (props: ButtonProps) => {
 
 </Select>
 </FormControl>
+<FormControl style={{margin:'5px'}} >
+                  <FormLabel>Task Description</FormLabel>
+                  <Input type='text' value={desc} onChange={(e) => setdesc(e.target.value)}/>
+              
+                </FormControl>
 
               </ModalBody>
               <ModalFooter>
 
-              <FormControl  colorScheme='teal' as='button' bgColor='gray.400' m={8} onClick={()=>handlesubmittask(typetask,priority)} >
+              <FormControl  colorScheme='teal' as='button' bgColor='gray.400' m={8} onClick={()=>handlesubmittask(typetask,priority,desc)} >
   <Input type='submit' value='Add task' />
 </FormControl>
                 <Button onClick={closetaskhere}>Close</Button> 

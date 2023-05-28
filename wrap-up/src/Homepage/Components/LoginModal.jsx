@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   FormControl,FormLabel,Input,Button,Stack,Box,Heading,FormErrorMessage,InputGroup,InputRightElement, Text,Divider,
   useToast,Flex, CloseButton,HStack,Center,Image,  Modal,
@@ -6,44 +6,75 @@ import {
   ModalContent,
   ModalHeader,
   ModalFooter,
-  ModalBody,
+  ModalBody,useDisclosure,
   ModalCloseButton,} from "@chakra-ui/react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
  import { useForm } from "react-hook-form";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { IoMdEye } from "react-icons/io";
 import loginimage from '../../Assests/loginmodal.png'
+import { AuthContext } from "../../RoutesPage/AuthContextProvider";
+import RegisterModal from "./RegisterModal";
 
 const LoginModal = ({isOpen,onOpen,onClose}) => {
+
+  const { isOpen:isregister, onOpen:onregister, onClose:closeregister } = useDisclosure()
+
+
+  const navigate=useNavigate()
     const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm();
       const blue='blue'
+      const {isAuth,loginUser,mainpageinfo,setmainpageinfo,handlelogindata} =useContext(AuthContext)
       const [showPassword, setShowPassword] = useState(false);
       const [email, setEmail] = useState("");
       const [pwd, setPwd] = useState("");
         const toast = useToast();
-       const Signin=data=>console.log(data)
+       const Signin=datas=>handlelogindata(datas).then((res)=>{
+     
+        localStorage.setItem("token",res.data.token)
+        localStorage.setItem("user_id",res.data.userId)
+        setmainpageinfo(res.data.user)
+           toast({
+          title: `Login Successful`,
+          description:"Redirecting to Dashboard",
+          status: "success",
+          isClosable: true,
+          duration: 2000,
+          position:'top'
+        })
+        
+      navigate('/workpage')
+      isOpen=!isOpen
+
+      }).catch((err)=>{
+        toast({
+        //  title: `${err.response.data.message}, Login again`,
+          title: `Login again`,
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position:'top'
+        })
+       
+      })
         const handleShowPassword = () => setShowPassword(!showPassword);
 
 
   return (
-    <Box bg="gray.50" height="fit-content" width='800px' p={1} border='1px solid green' br='10px' zIndex={100} isOpen={isOpen} position='absolute' translateY={-50} translateX={-50} >
-    <Box maxW="90%" mx="auto" p={1} border='7px soliid pink'  >
-        <HStack justifyContent='space-between' mt='15px'>  
-      <Heading as="h1" size="xl" textAlign="center" mb={4} >
-        Sign In
-
-      </Heading>
-  <CloseButton onClick={onClose} boxSize={17}/>
-</HStack>
-    
-    
+    <Modal isCentered size={{ base:'xl' ,lg:'2xl'}} bg="gray.50"  onClose={onClose}  height="fit-content" width='800px' p={1} border='1px solid green' br='10px' zIndex={100} isOpen={isOpen} position='absolute' translateY={-50} translateX={-50} >
+   <ModalOverlay />
+   <ModalContent>
+   <ModalHeader fontSize='28px'>   Sign In</ModalHeader>
+          <ModalCloseButton  fontSize='20px'/>
+          <ModalBody>
+          
           <Stack >
      <Flex justify={'space-around'} > 
-    <Box > <Image w='100%' h='350px' src={loginimage} /> </Box>
+    <Box display={{base:'none',sm:'block'}} > <Image w='100%' h='350px' src={loginimage} /> </Box>
 
     <Box bg="white"  borderRadius="md" w='300px'  boxShadow="lg" mt={"50px"} ml='-50px' >
          <form onSubmit={handleSubmit(Signin)} w='100%'> 
@@ -66,6 +97,7 @@ const LoginModal = ({isOpen,onOpen,onClose}) => {
               <InputGroup >
                 <Input bg='green.100'
                   type={showPassword ? "text" : "password"}
+                 // type='password'
                   name="password"
                   {...register("password", { required: true })}
                   value={pwd}
@@ -86,9 +118,8 @@ const LoginModal = ({isOpen,onOpen,onClose}) => {
               loadingText="Signing In"
               colorScheme="teal"
               variant="outline"
-              mt='8px'>
-              {/* //onClick={GetSign}> */}
-
+              w='150px'
+              mt='10px'>
               Sign In
             </Button>
       
@@ -100,6 +131,32 @@ const LoginModal = ({isOpen,onOpen,onClose}) => {
          </Stack>
 
 
+          
+
+
+          </ModalBody>
+          <ModalFooter>     
+   
+      <Link to="#" color="blue.100">
+        <Button onClick={onregister}
+        onClose={onClose}
+          border={"2px solid"}
+          colorScheme="teal"
+          mt="20px"
+          w='150px'
+         
+          >
+          Create Account
+        </Button>{" "}
+      </Link>
+     </ModalFooter>
+   </ModalContent>
+{ 
+  isregister && <RegisterModal  isOpen={isregister} onOpen={onregister} onClose={closeregister}  />
+}
+
+    <Box maxW="90%" mx="auto" p={1} border='7px soliid pink'  >
+        
 
     </Box>
     <Divider
@@ -110,19 +167,8 @@ const LoginModal = ({isOpen,onOpen,onClose}) => {
       borderColor="gray.500"
       borderWidth="1px"
     />
-    <Flex w="100%" justify={"center"}>
-      {" "}
-      <Link to="/register" color="blue.500">
-        <Button
-          border={"2px solid"}
-          colorScheme="teal"
-          mt="20px"
-          >
-          Create Account
-        </Button>{" "}
-      </Link>
-    </Flex>
-  </Box>
+  
+  </Modal>
   )
 }
 

@@ -1,8 +1,9 @@
 import {Avatar,chakra,SimpleGrid,useColorModeValue,Container,Image,Box, VStack, Heading, Stack,Spacer,Text,Button, 
-  HStack,  Flex, Link,Icon, Divider } from '@chakra-ui/react'
+  HStack,  Flex, Link,Icon, Divider,useDisclosure } from '@chakra-ui/react'
 import React from 'react'
 
 import {FcRight} from "react-icons/fc"
+import LoginModal from './LoginModal'
 
 const Herobannerpage = () => {
  
@@ -204,7 +205,7 @@ function TestimonialCard(props) {
         mb={16}
         mx={'auto'}>
         {testimonials.map((cardInfo, index) => (
-          <TestimonialCard {...cardInfo} index={index} />
+          <TestimonialCard {...cardInfo} key={index} index={index} />
         ))}
       </SimpleGrid>
       <Box>
@@ -222,34 +223,26 @@ function TestimonialCard(props) {
  
  
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+const { isOpen:islogin, onOpen:onlogin, onClose:closelogin } = useDisclosure()
 
- 
- 
   return (
-    <Flex  direction='column' gap='50px'  >
+    <Flex  direction='column' gap='50px' zIndex='-1'  >
     <Box  mb='530px'  >
-   <Box  border='3px solid green' w='88%' h='80vh' margin='auto' position='absolute'  left="30" right='30' top='-20' mt={10} zIndex='-1' mb={8}
+   <Box  w='88%' h='80vh' margin='auto' position='absolute' borderTopRightRadius={'85%'}  left="30" right='30' top='-20' mt={10}  mb={8}
   backgroundImage={{xl:"url('https://web-static.wrike.com/cdn-cgi/image/format=auto,quality=100,width=1520/tp/storage/uploads/5a479da8-1540-4e2e-92a4-102095cb6f8e/rebrand-hero-illustration-main-home-2x.png')",md:''}}
   bgPosition="center"  bgRepeat="no-repeat" >
 
-  <VStack position='relative'  top="50%" left="3%" >
+  <VStack position='relative'  top="50%" left="3%" zIndex='2' >
 <Heading>Remove barriers, find clarity <br /> exceed goals</Heading>
 <Text>Anything is possible with the most powerful work management software at your fingertips.</Text>
 <Spacer/>
-<Button colorScheme='teal' size='lg'>
-   Log in
+<Button colorScheme='teal' size='lg' onClick={onlogin} onClose={closelogin} >
+<Text  onClick={onlogin} onClose={closelogin} > Login</Text>
   </Button>
+  {
+  islogin && <LoginModal   isOpen={islogin}  onOpen={onlogin} onClose={closelogin} />
+}
+
 <Spacer/>
 <Text>TRUSTED BY 20,000+ ORGANIZATIONS WORLDWIDE</Text>
  <Spacer/>
@@ -299,6 +292,7 @@ color='black'
 spans='' linktext='Download free report' source='https://web-static.wrike.com/cdn-cgi/image/format=auto,quality=80,width=615,dpr=2/tp/storage/uploads/1f3923ce-f80d-4dec-8b66-904df15a9752/promo-ebook-dark-matter-of-work-light-theme-2x.png'
 color='black'  rowoppo={true}
 />
+
    </Flex>
   )
 }

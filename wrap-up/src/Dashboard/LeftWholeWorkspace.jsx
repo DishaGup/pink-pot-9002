@@ -1,4 +1,6 @@
 import React from 'react'
+import { useDrag, useDrop } from 'react-dnd';
+
 import {
     Box, Table, Text, Link, Image, Thead,  Tbody, Tr, Th, Td, TableCaption, TableContainer, CloseButton, HStack,  VStack, UnorderedList, ListItem, 
     useDisclosure,Button } from '@chakra-ui/react'
@@ -71,8 +73,7 @@ import {
 
 
   return (
-    <TableContainer w='content-fit' gap='10px' maxWidth='100%' p={3} overflowY='auto' zIndex={-1} borderRadius={8}  border='2px' borderColor='#FED7E2' >   
- 
+    <DraggableTableContainer>  
       <Table variant='simple' colorScheme='pink' rowGap='50px'  overflowY='auto' >
       
         <TableCaption border='2 px solid red' borderColor='#FED7E2'>Missing something? Tell us what you’d like to see on your Home page.</TableCaption>
@@ -102,8 +103,37 @@ import {
         </Tbody>
 
       </Table>
-    </TableContainer>
-  )
+      </DraggableTableContainer>)
 }
 
 export default LeftWholeWorkspace
+
+
+
+export const DraggableTableContainer = ({ children }) => {
+  const [{ isDragging }, drag] = useDrag({
+    item: { type: 'TABLE_CONTAINER' },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  return (
+    <div  ref={drag}>  
+    <TableContainer
+      w='content-fit'
+      gap='10px'
+      maxWidth='100%'
+      p={3}
+      overflowY='auto'
+      zIndex={-1}
+      borderRadius={8}
+      border='2px'
+      borderColor='#FED7E2'
+     
+      opacity={isDragging ? 0.5 : 1}
+    >
+      {children}
+    </TableContainer> </div>
+  );
+};
