@@ -18,9 +18,9 @@ const choosecolor=['blue','pink','purple','cyan','green','whatsapp','red','blood
 useEffect(()=>{
   handlefetchtask()
   },[])
-  
+
     return (
-      <TableContainer w='full' gap='20px'  minHeight={'5rem'} overflowX='auto'  overflowY='auto' boxShadow='2xl' borderRadius={8}>
+      <TableContainer w='full' gap='20px' minWidth={'300px'} minHeight={'5rem'} overflowX='auto'  overflowY='auto' boxShadow='2xl' borderRadius={8}>
         <Table variant='simple' colorScheme='pink' rowGap='50px'  >
           <TableCaption  mt='80px'  >
             <Heading size='md' >{ projectname?`${projectname} project `:' No tasks to work on'}</Heading> 
@@ -44,10 +44,12 @@ useEffect(()=>{
 
 
            visibleTodos && visibleTodos.length >0 ? (visibleTodos.map((el) => (
-   
+    
              <Tr   key={el._id} > 
-            <Link  to={`/workpage/single/${el._id}`} >     <Td  fontWeight='600' textDecoration={el?.status?'line-through':''}    color={`${choosecolor[Math.floor(Math.random()*20)]}`} >{el?.title}</Td>
-            </Link>
+             {/* <Td w='50px'  >{el.timecreated?Date.now()-el.timecreated :'2 days ago'}</Td> */}
+                <Td  fontWeight='600' textAlign={'center'} textDecoration={el?.status?'line-through':''}    color={`${choosecolor[Math.floor(Math.random()*20)]}`} > <Link  to={`/workpage/single/${el._id}`} > 
+                {el?.title}
+            </Link> </Td>
               <Td bg= {el.priority==='high'?'red.200':el.priority==='low'?'green.200':'cream.300'}    borderRadius={5} w='fit-content'    >{el?.priority}</Td>
              <Td onClick={()=>handletoggle(el._id,el.status)} >{el?.status?'completed':'Incompleted'}</Td>
              <Td  w='fit-content' ><Button _hover={{bg:'red.300'}}  bg='red.500'  borderRadius={15} color='white'  onClick={()=>handledelete(el._id)} >  Remove</Button> </Td>

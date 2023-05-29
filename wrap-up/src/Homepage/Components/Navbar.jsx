@@ -38,12 +38,12 @@ const SignupForm = () => {
       projectdesc:'',
     },
     onSubmit: values => {
-    //  console.log(values,'..40')
+    //  return (values,'..40')
 //setmainpageinfo(values)
 registerUser(values)
 
-// console.log(mainpageinfo)
-//console.log(values,'..45')
+// return (mainpageinfo)
+//return (values,'..45')
 return( <Alert
   status='success'
   variant='subtle'
@@ -69,7 +69,7 @@ return( <Alert
 )
     },
   });
-//  console.log(mainpageinfo)
+//  return (mainpageinfo)
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormLabel   htmlFor="firstname">First Name</FormLabel>
@@ -380,7 +380,7 @@ const { isOpen:islogin, onOpen:onlogin, onClose:closelogin } = useDisclosure()
       } = useDisclosure({ defaultIsOpen: true })
     
       return( 
-      <Box  position='fixed' top={0} h='auto'  bgColor='cream' right={0} left={0} mb={3}  boxShadow='md' rounded='sm' bg='white'>
+      <Box  position='absolute' top={0} h='auto'  bgColor='cream' right={0} left={0} mb={3}  boxShadow='md' rounded='sm' bg='white'>
       
   {    isVisible ? (
         <Flex w='100%' margin='auto' h='1cm' bgColor={'grsy.500'} >

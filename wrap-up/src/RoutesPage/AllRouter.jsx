@@ -6,6 +6,7 @@ import Mainworkpage from '../Dashboard/Mainworkpage';
 
 import MainHomepage from '../Homepage/Components/MainHomepage';
 import Privateroute from './Privateroute';
+import SingleTaskPage from '../Dashboard/SingleTaskPage';
 
 const AllRouter = () => {
   return (
@@ -17,8 +18,8 @@ const AllRouter = () => {
 </Privateroute>
 
 } />
-<Route path='/workpage/single/:id' element={<Privateroute>
-    <Mainworkpage />
+<Route path='/workpage/single/:ids' element={<Privateroute>
+    <SingleTaskPage />
 </Privateroute>
 
 } /> 

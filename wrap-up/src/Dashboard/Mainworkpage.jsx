@@ -8,11 +8,6 @@ import { AuthContext } from '../RoutesPage/AuthContextProvider'
 
 
 const Mainworkpage = () => {
-  let {handlefetchuserdetails} =useContext(AuthContext)
-
-useEffect(()=>{
-  handlefetchuserdetails()
-},[])
 
 
 

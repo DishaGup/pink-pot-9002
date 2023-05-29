@@ -11,7 +11,7 @@ import { useEffect } from 'react';
   const {mainpageinfo,handleedituserdetails} =useContext(AuthContext)
 let [obj,setobj]=useState(mainpageinfo[0])
  
-  console.log(obj)
+  //return (obj)
  
 
 let {firstname,lastname,email,password,projectname,projectdesc}=obj

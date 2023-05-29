@@ -1,7 +1,8 @@
 import React, { useState, useRef, useContext,useEffect} from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 import {
-    Box, Text, Link, Image, Divider, HStack, Avatar, VStack, UnorderedList, ListItem, Badge, Drawer, FormLabel, InputGroup, Select, Textarea, InputLeftAddon, InputRightAddon,
+    Box, Text, Image, Divider, HStack, Avatar, VStack, UnorderedList, ListItem, Badge, Drawer, FormLabel, InputGroup, Select, Textarea, InputLeftAddon, InputRightAddon,
     DrawerBody, Modal, Menu, MenuButton, MenuList, MenuItem,MenuDivider,ModalOverlay,
     ModalContent,ModalHeader,ModalFooter,ModalBody,ModalCloseButton,DrawerFooter,DrawerHeader,DrawerOverlay,DrawerContent,DrawerCloseButton, useBoolean
   } from '@chakra-ui/react'
@@ -19,11 +20,16 @@ import Contact from './Contact'
 import UserProfileEdit from './UserProfileEdit'
 import Videoplayer from './Videoplayer'
 const NavbarDashboard = (props) => {
-    const {colorMode,toggleColorMode,handlefetchtask,isAuth,logoutUser,visibleTodos,task,setShowActive,handlesubmittask,mainpageinfo} =useContext(AuthContext)
+    const {handlefetchuserdetails,colorMode,toggleColorMode,handlefetchtask,isAuth,logoutUser,visibleTodos,task,setShowActive,handlesubmittask,mainpageinfo} =useContext(AuthContext)
  
     const { isOpen: isdashboard, onOpen: opendash, onClose } = useDisclosure()
     const { isOpen: iscontact, onOpen: opencontact, onClose:closecontact } = useDisclosure()
    
+
+    useEffect(()=>{
+      handlefetchuserdetails()
+    },[])
+    
     var firstname = 'newbie'
     var lastname = '';
      var projectname='fr'
@@ -73,7 +79,7 @@ const NavbarDashboard = (props) => {
                 <DrawerBody>
                   <Stack spacing='24px' textAlign='left' align='left' >
                     <Flex>
-                      <Icon as={FcHome} boxSize={8} /> <Link w='90%'><Button ref={firstField} w='100%'>Home</Button></Link>
+                      <Icon as={FcHome} boxSize={8} /> <Link w='90%' to='/workpage'><Button ref={firstField} w='100%'>Home</Button></Link>
                     </Flex>
                     <Divider />
                     <Box>
@@ -131,7 +137,8 @@ const NavbarDashboard = (props) => {
           {colorMode === 'light' ? <BsMoonStarsFill  boxsize={8} /> : <BsSun   boxsize={8}/>}
         </Button> 
             <Tooltip label='Search tasks,projects,files and more' >
-              <Input type='search' placeholder='Search' />
+              <Input type='search' placeholder='Search by task..' />   
+               {/* onChange={(e)=>setvalues(e.target.value)} /> */}
             </Tooltip>
             <Tooltip label='Your assistant' >
               <Icon  onClick={opencontact} />

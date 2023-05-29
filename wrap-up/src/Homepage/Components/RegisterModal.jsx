@@ -34,7 +34,7 @@ const RegisterModal = ({isOpen,onOpen,onClose}) => {
       const [projectname, setprojectname] = useState("");
       const [projectdesc, setprojectdesc] = useState("");
         const toast = useToast();
-       const Signin=data=>registerUser(data).then((res)=>{console.log(res)
+       const Signin=data=>registerUser(data).then((res)=>{return (res)
          toast({
           title: `Please Login`,
           status: "success",
@@ -52,7 +52,7 @@ const RegisterModal = ({isOpen,onOpen,onClose}) => {
           isClosable: true,
           position:'top'
         })
-        console.log(err.response.data)
+        (err.response.data)
       })
         const handleShowPassword = () => setShowPassword(!showPassword);
 

@@ -7,7 +7,7 @@ const Privateroute = ({children}) => {
    
 const {isAuth}=useContext(AuthContext)
 const token=localStorage.getItem("token")
-//console.log(token)
+//return (token)
 if(!token){
     toast({
       title: 'Login into Your account!',

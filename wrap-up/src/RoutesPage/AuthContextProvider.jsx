@@ -4,7 +4,7 @@ import {data} from '../login'
 import axios from 'axios'
 import { useColorMode } from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react'
-//  http://localhost:8080
+//  http://localhost:8080    //https://erin-dizzy-clam.cyclic.app
 export const deployURL='https://erin-dizzy-clam.cyclic.app'
 
 
@@ -17,6 +17,7 @@ const AuthContextProvider = ({children}) => {
     const visibleTodos = showActive ? activeTodos : task;
     const[mainpageinfo,setmainpageinfo]=useState([])
     const { colorMode, toggleColorMode } = useColorMode()
+    const[search,setSearch]=useState('')
     const toast = useToast()
  
 
@@ -27,12 +28,16 @@ const handleedituserdetails=async(id)=>{
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       }
     })
-  //  console.log(response,'...94')
+
     setmainpageinfo(response.data.users)
   
 } catch (error) {
-  console.log(error)
+  return (error)
 }
+
+}
+
+const searchTask=(value)=>{
 
 }
 
@@ -47,7 +52,7 @@ const handleedituserdetails=async(id)=>{
       });
       handlefetchtask();
     } catch (error) {
-      console.log(error);
+      return (error);
     }
 
 
@@ -62,7 +67,7 @@ const handleedituserdetails=async(id)=>{
       });
       handlefetchtask();
     } catch (error) {
-      console.log(error);
+      return (error);
     }
    
   };
@@ -81,7 +86,7 @@ const handleedituserdetails=async(id)=>{
       });
       handlefetchtask();
     } catch (error) {
-      console.log(error);
+      return (error);
     }
   };
   
@@ -96,7 +101,7 @@ const handleedituserdetails=async(id)=>{
         //setmainpageinfo(response.data)
         settask(response.data.todos);
     } catch (error) {
-      console.log(error)
+      return (error)
     }
     
     }
@@ -109,24 +114,24 @@ const handleedituserdetails=async(id)=>{
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         }
       })
-    //  console.log(response,'...94')
+   
       setmainpageinfo(response.data.users)
     
   } catch (error) {
-    console.log(error)
+    return (error)
   }
   
   }
       
   const registerUser=async(values)=>{
- // console.log(values)
+ 
     try {
-    return axios.post(`${deployURL}/wrapup/users/register`,values).then((res)=>{console.log(res)
+    return axios.post(`${deployURL}/wrapup/users/register`,values).then((res)=>{return (res)
      
-      }).catch((err)=>console.log(err))
+      }).catch((err)=>(err))
   
     } catch (error) {
-      console.log(error)
+      return (error)
     }
  setAuth(true)
    
@@ -141,7 +146,7 @@ const handlelogindata=async(values)=>{
     return axios.post(`${deployURL}/wrapup/users/login`,values)
 
   } catch (error) {
-    console.log(error)
+    return (error)
   }
 }
 
