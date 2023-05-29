@@ -27,6 +27,7 @@ useEffect(()=>{
             Here you’ll see tasks assigned to you.</TableCaption>
           <Thead border='2 px solid red' borderColor='#FED7E2'>
             <Tr>
+              
               <Th fontWeight='700' fontSize='18px' >Assigned to me</Th>
             </Tr>
             <Divider />
